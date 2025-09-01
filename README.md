@@ -1,36 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Calculadora Financeira
 
-## Getting Started
+Uma aplicação web completa para cálculos financeiros desenvolvida com Next.js e TypeScript, oferecendo sistemas de amortização e análise de investimentos.
 
-First, run the development server:
+## 🚀 Funcionalidades
 
+### 💰 Sistemas de Financiamento
+- **SAC (Sistema de Amortização Constante)**: Parcelas decrescentes com amortização constante
+- **SAF (Sistema Francês - Price)**: Parcelas constantes com amortização crescente
+- **SAA (Sistema Americano)**: Pagamento de juros durante o período, amortização no final
+
+### 📊 Análise de Investimentos
+- **VPL (Valor Presente Líquido)**: Análise de viabilidade de projetos
+- **TIR (Taxa Interna de Retorno)**: Cálculo automático da taxa de retorno
+- **Payback Descontado**: Tempo de recuperação do investimento
+
+## 🛠️ Como Usar
+
+### Sistemas de Financiamento
+
+1. **Acesse a aba "Sistemas de Financiamento"**
+2. **Preencha os campos:**
+   - Valor do Financiamento (R$)
+   - Taxa de Juros (% ao mês)
+   - Número de Meses
+   - Sistema de Amortização (SAC, SAF ou SAA)
+3. **Clique em "Calcular"**
+4. **Visualize:**
+   - Resumo com totais de juros, amortização e prestações
+   - Tabela detalhada período a período
+
+#### Exemplo de Entrada:
+- Financiamento: R$ 100.000,00
+- Taxa: 1,5% ao mês
+- Tempo: 60 meses
+- Sistema: SAC
+
+### Análise de Investimentos (VPL)
+
+1. **Acesse a aba "Análise de Investimentos"**
+2. **Preencha os campos básicos:**
+   - Investimento Inicial (R$)
+   - Taxa de Desconto (% ao período)
+   - Tempo do Projeto (períodos)
+3. **Configure os fluxos de caixa:**
+   - Use "Gerar Períodos" para criar campos automaticamente
+   - Ou adicione fluxos individuais com "Adicionar Fluxo"
+   - Preencha os valores para cada período
+4. **Opcionalmente, configure o Valor Residual**
+5. **Clique em "Calcular VPL"**
+6. **Analise os resultados:**
+   - VPL final (se > 0, projeto é viável)
+   - TIR calculada automaticamente
+   - Payback descontado
+   - Tabela detalhada com análise período a período
+
+#### Exemplo de Entrada:
+- Investimento: R$ 50.000,00
+- Taxa: 12% ao ano
+- Tempo: 5 anos
+- Fluxos de Caixa: R$ 15.000,00 por ano
+- Valor Residual: R$ 10.000,00 no ano 5
+
+## 📋 Outputs Detalhados
+
+### Tabela de Amortização (Financiamentos)
+- **Período**: Número da parcela
+- **Saldo Devedor**: Valor ainda devido
+- **Amortização**: Valor que reduz a dívida
+- **Juros**: Valor dos juros do período
+- **Prestação**: Valor total da parcela
+
+### Análise de Fluxos (VPL)
+- **Período**: Período do fluxo de caixa
+- **Fluxo de Caixa**: Valor do período
+- **Fator Desconto**: Fator de desconto aplicado
+- **Valor Presente**: Valor descontado para o presente
+- **VP Acumulado**: Valor presente acumulado (VPL progressivo)
+
+## 🎯 Critérios de Decisão
+
+### Sistemas de Financiamento
+- **SAC**: Ideal quando se quer reduzir o valor das parcelas ao longo do tempo
+- **SAF (Price)**: Ideal para parcelas constantes e previsibilidade no orçamento
+- **SAA**: Ideal quando há expectativa de aumento de renda no futuro
+
+### Análise de Investimentos
+- **VPL > 0**: Projeto viável, agrega valor
+- **VPL = 0**: Projeto neutro, retorno igual ao custo de capital
+- **VPL < 0**: Projeto inviável, destrói valor
+- **TIR > Taxa de Desconto**: Projeto atrativo
+- **Payback**: Menor tempo é melhor para recuperação do investimento
+
+## 🚀 Como Executar
+
+1. **Instalar dependências:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Executar em modo desenvolvimento:**
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Acessar a aplicação:**
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗️ Tecnologias Utilizadas
 
-## Learn More
+- **Next.js 15**: Framework React com renderização server-side
+- **TypeScript**: Tipagem estática para maior segurança
+- **Tailwind CSS**: Framework CSS para estilização
+- **React Hooks**: Gerenciamento de estado moderno
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Estrutura do Projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── page.tsx                    # Página inicial
+│   ├── layout.tsx                  # Layout principal
+│   └── calculadora/
+│       ├── page.tsx               # Página principal da calculadora
+│       └── components/
+│           ├── FinancingCalculator.tsx  # Calculadora de financiamentos
+│           └── VPLCalculator.tsx        # Calculadora de VPL
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💡 Fórmulas Implementadas
 
-## Deploy on Vercel
+### SAC
+- Amortização = Valor Financiado / Número de Meses
+- Juros = Saldo Devedor × Taxa de Juros
+- Prestação = Amortização + Juros
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### SAF (Price)
+- PMT = VP × [i × (1+i)^n] / [(1+i)^n - 1]
+- Juros = Saldo Devedor × Taxa de Juros
+- Amortização = PMT - Juros
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### SAA
+- Juros = Valor Financiado × Taxa de Juros (todos os períodos)
+- Amortização = Valor Financiado (apenas no último período)
+
+### VPL
+- VPL = Σ [FCt / (1+i)^t] - Investimento Inicial
+- TIR: Taxa que torna VPL = 0 (método Newton-Raphson)
+- Payback: Período onde VP Acumulado ≥ 0
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
